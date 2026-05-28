@@ -1,293 +1,321 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Module 5 & 6 — Generative AI & Full Stack AI Applications</title>
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-surface": "#303030",
+                        "on-tertiary-fixed": "#00201b",
+                        "surface-tint": "#bc093c",
+                        "on-secondary": "#ffffff",
+                        "on-surface-variant": "#5b4041",
+                        "surface-dim": "#dcd9d9",
+                        "on-primary": "#ffffff",
+                        "on-primary-fixed-variant": "#91002b",
+                        "inverse-primary": "#ffb2b7",
+                        "error-container": "#ffdad6",
+                        "outline": "#8f6f71",
+                        "on-tertiary-container": "#98edda",
+                        "surface": "#fcf9f8",
+                        "on-error": "#ffffff",
+                        "secondary": "#265fa2",
+                        "tertiary-fixed": "#9df3df",
+                        "border-subtle": "#E9ECEF",
+                        "on-error-container": "#93000a",
+                        "tertiary-container": "#006e5f",
+                        "on-surface": "#1b1c1c",
+                        "surface-variant": "#e5e2e1",
+                        "surface-container": "#f0eded",
+                        "on-tertiary-fixed-variant": "#005045",
+                        "outline-variant": "#e3bdbf",
+                        "on-background": "#1b1c1c",
+                        "on-secondary-fixed-variant": "#004786",
+                        "inverse-on-surface": "#f3f0ef",
+                        "primary-fixed": "#ffdadb",
+                        "on-primary-container": "#ffd3d5",
+                        "surface-container-low": "#f6f3f2",
+                        "on-tertiary": "#ffffff",
+                        "ntu-red-bright": "#D71440",
+                        "on-secondary-container": "#004684",
+                        "surface-container-high": "#eae7e7",
+                        "on-secondary-fixed": "#001c3a",
+                        "primary-fixed-dim": "#ffb2b7",
+                        "surface-gray": "#F8F9FA",
+                        "background": "#fcf9f8",
+                        "error": "#ba1a1a",
+                        "surface-container-highest": "#e5e2e1",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-container": "#c1103f",
+                        "surface-bright": "#fcf9f8",
+                        "secondary-container": "#83b5fe",
+                        "secondary-fixed": "#d4e3ff",
+                        "ntu-blue-deep": "#11114E",
+                        "tertiary": "#005448",
+                        "tertiary-fixed-dim": "#81d6c3",
+                        "on-primary-fixed": "#40000e",
+                        "primary": "#97002d",
+                        "secondary-fixed-dim": "#a6c8ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "unit-xl": "32px",
+                        "gutter": "16px",
+                        "unit-xs": "4px",
+                        "container-margin": "16px",
+                        "unit-md": "16px",
+                        "unit-xxl": "48px",
+                        "unit-sm": "8px",
+                        "unit-lg": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-sm": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "body-md": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "label-md": ["Inter"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "label-sm": ["11px", {"lineHeight": "14px", "fontWeight": "500"}],
+                        "headline-lg": ["30px", {"lineHeight": "38px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
 <style>
-  :root{
-    --bg:#000;
-    --fg:#fff;
-    --accent:#ff8c1a;
-    --accent-soft:#ffb066;
-    --muted:#9a9a9a;
-    --line:#222;
-    --card:#0c0c0c;
-  }
-  *{box-sizing:border-box}
-  html,body{margin:0;padding:0;background:var(--bg);color:var(--fg);
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;
-    -webkit-font-smoothing:antialiased;
-    line-height:1.55;
-  }
-  .wrap{max-width:1100px;margin:0 auto;padding:56px 28px 96px}
-
-  header.top{border-bottom:1px solid var(--line);padding-bottom:28px;margin-bottom:40px}
-  .eyebrow{color:var(--accent);letter-spacing:.18em;text-transform:uppercase;font-size:12px;font-weight:600}
-  h1{font-size:38px;line-height:1.15;margin:10px 0 12px;font-weight:700}
-  h1 .amp{color:var(--accent)}
-  .lede{color:var(--muted);max-width:780px;font-size:16px}
-
-  .meta{display:flex;flex-wrap:wrap;gap:24px;margin-top:18px;font-size:13px;color:var(--muted)}
-  .meta b{color:var(--fg);font-weight:600}
-
-  section{margin-top:48px}
-  h2{font-size:24px;margin:0 0 6px;font-weight:700}
-  h2 .num{color:var(--accent)}
-  .sub{color:var(--muted);font-size:14px;margin-bottom:24px}
-
-  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
-  .card{
-    background:var(--card);
-    border:1px solid var(--line);
-    border-left:3px solid var(--accent);
-    padding:16px 16px 18px;
-    border-radius:6px;
-    position:relative;
-    transition:border-color .15s ease, transform .15s ease;
-  }
-  .card:hover{border-color:#333;border-left-color:var(--accent-soft)}
-  .step{font-size:11px;color:var(--accent);font-weight:700;letter-spacing:.1em}
-  .title{font-size:15px;font-weight:600;margin:4px 0 8px;color:var(--fg)}
-  .when{font-size:12px;color:var(--muted)}
-  .tag{
-    display:inline-block;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;
-    margin-top:10px;padding:3px 8px;border-radius:99px;
-    background:rgba(255,140,26,.12);color:var(--accent);border:1px solid rgba(255,140,26,.35);
-    font-weight:600;
-  }
-  .tag.sprint{background:rgba(255,255,255,.05);color:var(--fg);border-color:#2a2a2a}
-
-  .ships .ship-list{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
-  .ships .ship-list li{
-    background:var(--card);
-    border:1px solid var(--line);
-    border-top:3px solid var(--accent);
-    padding:18px 16px;
-    border-radius:6px;
-    display:flex;align-items:flex-start;gap:14px;
-  }
-  .ships .ship-n{
-    color:var(--accent);font-weight:700;font-size:22px;line-height:1;
-    font-feature-settings:"tnum";letter-spacing:.02em;
-    min-width:34px;
-  }
-  .ships .ship-t{color:var(--fg);font-size:15px;font-weight:500;line-height:1.35}
-  .ships .eyebrow{margin-bottom:8px}
-
-  .divider{display:flex;align-items:center;gap:18px;margin:64px 0 8px}
-  .divider-line{flex:1;height:1px;background:linear-gradient(90deg,transparent,#2a2a2a,transparent)}
-  .divider-label{
-    color:var(--accent);
-    font-size:12px;letter-spacing:.28em;text-transform:uppercase;font-weight:700;
-    padding:6px 14px;border:1px solid rgba(255,140,26,.4);border-radius:99px;
-    background:rgba(255,140,26,.06);
-    white-space:nowrap;
-  }
-  .overview-lede{color:var(--muted);font-size:14px;text-align:center;margin:0}
-  .overview-lede + section{margin-top:28px}
-
-  .legend{display:flex;flex-wrap:wrap;gap:14px;margin-top:18px;font-size:12px;color:var(--muted)}
-  .legend .dot{display:inline-block;width:10px;height:10px;border-radius:99px;margin-right:6px;vertical-align:middle}
-  .legend .d-deploy{background:var(--accent)}
-  .legend .d-sprint{background:#666}
-
-  .eligibility .eligibility-card{
-    background:var(--card);
-    border:1px solid var(--line);
-    border-left:3px solid var(--accent);
-    border-radius:6px;
-    padding:18px 20px;
-    display:flex;flex-wrap:wrap;align-items:baseline;gap:14px;
-  }
-  .eligibility-label{
-    color:var(--accent);font-size:11px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;
-    white-space:nowrap;
-  }
-  .eligibility-text{color:var(--fg);font-size:15px;line-height:1.5;flex:1;min-width:220px}
-  .eligibility-text b{color:var(--fg);font-weight:600}
-
-  footer{margin-top:64px;padding-top:24px;border-top:1px solid var(--line);color:var(--muted);font-size:12px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
-  footer span b{color:var(--fg)}
-  .design-credit{flex-basis:100%;text-align:center;color:var(--fg);font-size:13px;letter-spacing:.02em;margin-top:10px}
-  .design-credit .label{color:var(--accent);font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;font-weight:700;margin-right:8px}
-
-  @media (max-width:560px){
-    h1{font-size:28px}
-    .wrap{padding:36px 18px 64px}
-  }
-</style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        body { min-height: max(884px, 100dvh); }
+    </style>
 </head>
-<body>
-<div class="wrap">
-
-  <header class="top">
-    <div class="eyebrow">SCTP · DSAI Program · Roadmap v1.0</div>
-    <h1>Module 5 <span class="amp">&</span> 6 — Generative AI &amp; Full Stack AI Applications</h1>
-    <p class="lede">A 15-step path from responsible AI fundamentals to a multi-agent full-stack capstone. Each building block is taught, then shipped as a deployment.</p>
-    <div class="meta">
-      <span><b>Module 5</b> · Gen AI foundations · 15 hrs</span>
-      <span><b>Module 6</b> · Building blocks to full stack · 30 hrs</span>
-      <span><b>Deployments</b> · 5 shipped milestones</span>
-    </div>
-    <div class="legend">
-      <span><span class="dot d-deploy"></span>Deployment milestone</span>
-      <span><span class="dot d-sprint"></span>Capstone work sprint</span>
-    </div>
-  </header>
-
-  <section class="ships">
-    <div class="eyebrow">Your Capstone Projects</div>
-    <h2>What You'll <span class="num">Ship</span></h2>
-    <p class="sub">Five working artifacts — one per deployment milestone.</p>
-    <ol class="ship-list">
-      <li><span class="ship-n">01</span><span class="ship-t">A single-turn AI app</span></li>
-      <li><span class="ship-n">02</span><span class="ship-t">A website with enhanced UX design</span></li>
-      <li><span class="ship-n">03</span><span class="ship-t">An agentic RAG system</span></li>
-      <li><span class="ship-n">04</span><span class="ship-t">A fully functional workflow automation</span></li>
-      <li><span class="ship-n">05</span><span class="ship-t">A multi-agent orchestration</span></li>
-    </ol>
-  </section>
-
-  <div class="divider" role="separator" aria-hidden="true">
-    <span class="divider-line"></span>
-    <span class="divider-label">Course Overview</span>
-    <span class="divider-line"></span>
-  </div>
-
-  <p class="overview-lede">How you'll get there — 15 topics across two modules.</p>
-
-  <section>
-    <h2><span class="num">Module 5</span> · Generative AI</h2>
-    <p class="sub">Responsible AI → LLMs → prompting → context → prototyping → single-turn full stack.</p>
-    <div class="grid">
-
-      <div class="card">
-        <div class="step">TOPIC 01</div>
-        <div class="title">Responsible AI</div>
-        <div class="when">Ethics, safety, and security risks.</div>
-      </div>
-
-      <div class="card">
-        <div class="step">TOPIC 02</div>
-        <div class="title">Understanding LLMs</div>
-        <div class="when">How large language models actually work.</div>
-      </div>
-
-      <div class="card">
-        <div class="step">TOPIC 03</div>
-        <div class="title">Prompt Engineering</div>
-        <div class="when">Designing prompts that hold up.</div>
-      </div>
-
-      <div class="card">
-        <div class="step">TOPIC 04</div>
-        <div class="title">Context Engineering</div>
-        <div class="when">Shaping the input window for reliable answers.</div>
-      </div>
-
-      <div class="card">
-        <div class="step">TOPIC 05</div>
-        <div class="title">Building Apps — Quick Prototyping</div>
-        <div class="when">No-code &amp; agentic IDE rapid builds.</div>
-      </div>
-
-      <div class="card">
-        <div class="step">TOPIC 06</div>
-        <div class="title">Building Block #1 — Single-Turn LLM Apps</div>
-        <div class="when">The foundational app pattern.</div>
-      </div>
-
-      <div class="card">
-        <div class="step">TOPIC 07</div>
-        <div class="title">Full Stack — Single-Turn LLM Apps</div>
-        <div class="when">First production-style build.</div>
-        <span class="tag">Deployment 1</span>
-        <span class="tag sprint">Capstone Sprint</span>
-      </div>
-
-    </div>
-  </section>
-
-  <section>
-    <h2><span class="num">Module 6</span> · Building Full Stack AI Applications</h2>
-    <p class="sub">Agents → UX &amp; web → agentic RAG → workflow automation → multi-agent orchestration.</p>
-    <div class="grid">
-
-      <div class="card">
-        <div class="step">TOPIC 08</div>
-        <div class="title">Skills and Agents</div>
-        <div class="when">From prompts to autonomous tools.</div>
-      </div>
-
-      <div class="card">
-        <div class="step">TOPIC 09</div>
-        <div class="title">Building Block #2 — UX Design</div>
-        <div class="when">Deploying the web-site for your app.</div>
-        <span class="tag">Deployment 2</span>
-        <span class="tag sprint">Capstone Sprint</span>
-      </div>
-
-      <div class="card">
-        <div class="step">TOPIC 10</div>
-        <div class="title">Building Block #3 — Harness Engineering</div>
-        <div class="when">Agentic RAG retrieval patterns.</div>
-      </div>
-
-      <div class="card">
-        <div class="step">TOPIC 11</div>
-        <div class="title">Full Stack — Agentic RAG</div>
-        <div class="when">Harness engineering, end-to-end.</div>
-        <span class="tag">Deployment 3</span>
-        <span class="tag sprint">Capstone Sprint</span>
-      </div>
-
-      <div class="card">
-        <div class="step">TOPIC 12</div>
-        <div class="title">Building Block #4 — Workflow Automation</div>
-        <div class="when">Chat bots and automation loops.</div>
-      </div>
-
-      <div class="card">
-        <div class="step">TOPIC 13</div>
-        <div class="title">Workflow Automation — RAG</div>
-        <div class="when">Automated, retrieval-grounded flows.</div>
-        <span class="tag">Deployment 4</span>
-        <span class="tag sprint">Capstone Sprint</span>
-      </div>
-
-      <div class="card">
-        <div class="step">TOPIC 14</div>
-        <div class="title">Project Delivery — Agile / Scrum</div>
-        <div class="when">Shipping like a real team.</div>
-      </div>
-
-      <div class="card">
-        <div class="step">TOPIC 15</div>
-        <div class="title">Multi-Agent Orchestration — RAG</div>
-        <div class="when">The capstone: agents working together.</div>
-        <span class="tag">Deployment 5</span>
-        <span class="tag sprint">Capstone Sprint</span>
-      </div>
-
-    </div>
-  </section>
-
-  <section class="eligibility">
-    <h2>Who Should <span class="num">Apply</span></h2>
-    <p class="sub">Suitable for students and working adults.</p>
-    <div class="eligibility-card">
-      <span class="eligibility-label">Prerequisite</span>
-      <span class="eligibility-text"><b>Basic Python</b> — variables, loops, functions, classes, and standard built-in methods. No computer science degree required.</span>
-    </div>
-  </section>
-
-  <footer>
-    <span><b>Nanyang Technological University · Singapore</b> · SCTP — DSAI Program</span>
-    <span>Program Director &amp; Trainer: <b>Swarup Biswas</b> · Roadmap v1.0</span>
-    <span class="design-credit"><span class="label">Course Designed by</span><b>Swarup Biswas</b></span>
-  </footer>
-
+<body class="bg-background text-on-surface font-body-md antialiased">
+<!-- TopAppBar -->
+<header class="w-full sticky top-0 z-50 bg-surface-container-lowest border-b border-border-subtle flex justify-between items-center px-4 py-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary p-2 cursor-pointer" data-icon="menu">menu</span>
+<span class="font-headline-md text-headline-md font-bold text-primary">Swarup-DSAI</span>
 </div>
-</body>
-</html>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant p-2 cursor-pointer" data-icon="search">search</span>
+<div class="w-8 h-8 rounded-full bg-surface-container-high border border-outline-variant flex items-center justify-center overflow-hidden ml-2">
+<img alt="NTU Logo" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAF7C01ZtvCPpebSFiZ9UmtshB-eYrrGpZOTPNEfQqo2dWmICOUMcK9LFDkiRan4Ei29bjbW9k45TM2sUHlI0on8z27DbF5BsPNri2l8tCxJvEGxTCJTViE3phcBAteEKLikTaQn4_9r2ODFTavKcjTnJg8QOzXXyq9OqRbczaFIr-xKzg2N_NHIEV1BNHvKIqLHYkgQqNUfDl9FzeHkqXFLGeYcf5LZsZIw0pzA0nDyAfDCLLbelX0HWgj3Kt2rciWiX-o1L2iNcs"/>
+</div>
+</div>
+</header>
+<main class="pb-unit-xxl flex flex-col gap-6">
+<!-- Hero Section -->
+<section class="relative bg-ntu-blue-deep text-white px-4 py-unit-xxl overflow-hidden">
+<div class="absolute inset-0 opacity-10 pointer-events-none">
+<div class="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white/20 via-transparent to-transparent"></div>
+</div>
+<div class="relative z-10">
+<span class="inline-block bg-primary px-unit-sm py-1 rounded-sm text-label-md font-label-md mb-unit-sm uppercase tracking-wider">Academic Roadmap</span>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile mb-unit-xs">SCTP · DSAI Program · Roadmap v1.0</h1>
+<p class="font-body-md text-body-md opacity-90 max-w-xs">Data Science &amp; Artificial Intelligence Professional Conversion Program.</p>
+</div>
+</section>
+<!-- Stats Overview -->
+<section class="px-4 -mt-10 relative z-20">
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-surface-container-lowest p-4 border border-border-subtle rounded-lg shadow-sm">
+<p class="font-label-md text-xs text-on-surface-variant uppercase mb-1">Module 5</p>
+<p class="font-headline-sm text-xl text-primary mb-1">15 Hours</p>
+<p class="font-body-sm text-xs text-on-surface-variant">Gen AI Foundations</p>
+</div>
+<div class="bg-surface-container-lowest p-4 border border-border-subtle rounded-lg shadow-sm">
+<p class="font-label-md text-xs text-on-surface-variant uppercase mb-1">Module 6</p>
+<p class="font-headline-sm text-xl text-primary mb-1">30 Hours</p>
+<p class="font-body-sm text-xs text-on-surface-variant">Full Stack Apps</p>
+</div>
+</div>
+</section>
+<!-- What You'll Ship (Milestones) -->
+<section class="px-4">
+<h2 class="font-headline-md text-headline-md text-primary mb-4 border-l-4 border-primary pl-4">What You'll Ship</h2>
+<div class="flex flex-col gap-4">
+<!-- Milestone Card -->
+<div class="flex gap-4 items-start bg-surface-container-low p-4 rounded-lg border border-border-subtle">
+<span class="flex-shrink-0 min-w-[40px] h-10 rounded-full bg-primary text-white flex items-center justify-center font-headline-sm">01</span>
+<div>
+<p class="font-headline-sm text-headline-sm text-ntu-blue-deep">Single-turn AI app</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Foundational interaction pattern deployment.</p>
+</div>
+</div>
+<div class="flex gap-4 items-start bg-surface-container-low p-4 rounded-lg border border-border-subtle">
+<span class="flex-shrink-0 min-w-[40px] h-10 rounded-full bg-primary text-white flex items-center justify-center font-headline-sm">02</span>
+<div>
+<p class="font-headline-sm text-headline-sm text-ntu-blue-deep">Website with enhanced UX</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">High-fidelity web interface for AI models.</p>
+</div>
+</div>
+<div class="flex gap-4 items-start bg-surface-container-low p-4 rounded-lg border border-border-subtle">
+<span class="flex-shrink-0 min-w-[40px] h-10 rounded-full bg-primary text-white flex items-center justify-center font-headline-sm">03</span>
+<div>
+<p class="font-headline-sm text-headline-sm text-ntu-blue-deep">Agentic RAG system</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Intelligent retrieval with autonomous routing.</p>
+</div>
+</div>
+<div class="flex gap-4 items-start bg-surface-container-low p-4 rounded-lg border border-border-subtle">
+<span class="flex-shrink-0 min-w-[40px] h-10 rounded-full bg-primary text-white flex items-center justify-center font-headline-sm">04</span>
+<div>
+<p class="font-headline-sm text-headline-sm text-ntu-blue-deep">Functional workflow automation</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">End-to-end automated business logic.</p>
+</div>
+</div>
+<div class="flex gap-4 items-start bg-surface-container-low p-4 rounded-lg border border-border-subtle">
+<span class="flex-shrink-0 min-w-[40px] h-10 rounded-full bg-primary text-white flex items-center justify-center font-headline-sm">05</span>
+<div>
+<p class="font-headline-sm text-headline-sm text-ntu-blue-deep">Multi-agent orchestration</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Collaborative AI agents solving complex tasks.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Course Details / Modules -->
+<section class="px-4">
+<h2 class="font-headline-md text-headline-md text-primary mb-4 border-l-4 border-primary pl-4">Module 5 · Generative AI</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4">Responsible AI → LLMs → prompting → context → prototyping → single-turn full stack.</p>
+<div class="flex flex-col gap-2">
+<div class="flex items-center gap-4 py-4 border-b border-border-subtle">
+<span class="font-label-sm text-label-sm text-primary uppercase w-16">Topic 01</span>
+<div>
+<p class="font-headline-sm text-[18px] text-ntu-blue-deep leading-tight">Responsible AI</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Ethics, safety, and security risks.</p>
+</div>
+</div>
+<div class="flex items-center gap-4 py-4 border-b border-border-subtle">
+<span class="font-label-sm text-label-sm text-primary uppercase w-16">Topic 02</span>
+<div>
+<p class="font-headline-sm text-[18px] text-ntu-blue-deep leading-tight">Understanding LLMs</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">How large language models actually work.</p>
+</div>
+</div>
+<div class="flex items-center gap-4 py-4 border-b border-border-subtle">
+<span class="font-label-sm text-label-sm text-primary uppercase w-16">Topic 03</span>
+<div>
+<p class="font-headline-sm text-[18px] text-ntu-blue-deep leading-tight">Prompt Engineering</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Designing prompts that hold up.</p>
+</div>
+</div>
+<!-- Deployment Milestone -->
+<div class="bg-primary/5 border border-primary/20 p-4 rounded-lg mt-4">
+<div class="flex items-center gap-2 text-primary mb-1">
+<span class="material-symbols-outlined" data-icon="rocket_launch">rocket_launch</span>
+<span class="font-label-md text-label-md uppercase">Deployment 1 Capstone Sprint</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface">Integrated build of your first single-turn LLM application.</p>
+</div>
+</div>
+</section>
+<!-- Who Should Apply Section -->
+<section class="mx-4 bg-surface-container-high p-6 rounded-xl flex flex-col gap-4">
+<h2 class="font-headline-sm text-headline-sm text-ntu-blue-deep">Who Should Apply</h2>
+<div class="flex items-start gap-2">
+<span class="material-symbols-outlined text-primary mt-1" data-icon="check_circle">check_circle</span>
+<p class="font-body-md text-body-md">Suitable for students and working adults looking for professional conversion.</p>
+</div>
+<div class="bg-surface-container-lowest p-4 rounded-lg border border-outline-variant">
+<p class="font-label-md text-label-md text-primary uppercase mb-1">Prerequisite</p>
+<p class="font-headline-sm text-[18px] mb-2">Basic Python</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Variables, loops, functions, classes, and standard built-in methods.</p>
+</div>
+</section>
+<!-- Trainer Info -->
+<section class="px-4">
+<div class="flex items-center gap-4">
+<div class="w-16 h-16 rounded-full overflow-hidden border-2 border-primary p-0.5 flex-shrink-0">
+<img alt="Trainer Swarup Biswas" class="w-full h-full object-cover rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhvFEGaV9BmhXfG8WiLGLbXQQLg41iM-f-sMfFdkzO4YYtOXaXgcG4ew5tehsLJjRil8fNDCVwwk_7H0RiK_7geBHDE0GxY7RP_91MzcnC0pU8jwMm8ai32M9ocGTLMCVaZB0WhYmz3hFunI-g40f4_7HrOT-XgakiW0h0uCCTKYESrH9gbcCdswIyNBtu2CjWcK0i4fjPanmOf0_MqV70rYaG4L5BBlkBnysUsNCK5p6oRN7ebQkyGhY6Bgl9lBvshk_fxeix6CE"/>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase">Program Director &amp; Trainer</p>
+<p class="font-headline-sm text-headline-sm text-ntu-blue-deep">Swarup Biswas</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Nanyang Technological University</p>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full bg-surface-container-high border-t border-border-subtle flex flex-col items-center p-6 text-center gap-4 pb-24">
+<p class="font-label-md text-label-md text-primary">Nanyang Technological University</p>
+<div class="flex flex-wrap justify-center gap-4 mb-2">
+<a class="text-on-surface-variant font-body-sm text-body-sm hover:text-ntu-red-bright transition-colors" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant font-body-sm text-body-sm hover:text-ntu-red-bright transition-colors" href="#">Contact Us</a>
+<a class="text-on-surface-variant font-body-sm text-body-sm hover:text-ntu-red-bright transition-colors" href="#">Terms of Use</a>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">© 2024 Nanyang Technological University</p>
+</footer>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 bg-surface-container-lowest border-t border-border-subtle flex justify-around items-stretch pb-safe">
+<button class="flex flex-col items-center justify-center text-primary-container min-w-[64px] min-h-[56px] py-2 px-4 transition-all duration-150 ease-in-out">
+<div class="bg-primary-container text-on-primary rounded-full px-4 py-1 flex items-center justify-center mb-1">
+<span class="material-symbols-outlined text-[24px]" data-icon="map">map</span>
+</div>
+<span class="font-label-md text-label-md font-bold">Roadmap</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant min-w-[64px] min-h-[56px] py-2 px-4 hover:text-primary transition-all duration-150 ease-in-out">
+<span class="material-symbols-outlined mb-1" data-icon="menu_book">menu_book</span>
+<span class="font-label-md text-label-md">Modules</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant min-w-[64px] min-h-[56px] py-2 px-4 hover:text-primary transition-all duration-150 ease-in-out">
+<span class="material-symbols-outlined mb-1" data-icon="ads_click">ads_click</span>
+<span class="font-label-md text-label-md">Milestones</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant min-w-[64px] min-h-[56px] py-2 px-4 hover:text-primary transition-all duration-150 ease-in-out">
+<span class="material-symbols-outlined mb-1" data-icon="contact_support">contact_support</span>
+<span class="font-label-md text-label-md">Contact</span>
+</button>
+</nav>
+<script>
+        // Micro-interactions for scrolling effects
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 20) {
+                header.classList.add('shadow-md');
+                header.classList.add('bg-white');
+            } else {
+                header.classList.remove('shadow-md');
+            }
+        });
+
+        // Simple animation on milestone card appear
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100', 'translate-y-0');
+                    entry.target.classList.remove('opacity-0', 'translate-y-4');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('section > div > div').forEach(card => {
+            card.classList.add('transition-all', 'duration-500', 'opacity-0', 'translate-y-4');
+            observer.observe(card);
+        });
+    </script>
+</body></html>
