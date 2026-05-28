@@ -1,0 +1,8 @@
+# macOS
+.DS_Store
+
+# Editor / tooling state
+.claude/
+
+# Source material — do not publish
+reference -documents/
